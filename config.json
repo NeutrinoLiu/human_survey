@@ -1,0 +1,12 @@
+{
+    "rand_seed": null,
+    "parallel_sample": false,
+    "total_pairs": 10,
+    "img_dirs": [ 
+        "images/cat",
+        "images/dog",
+        "images/nanachi"
+    ],
+    "img_postfix": "jpeg",
+    "remark": "it is expected that sub dir contains the same amount of images"
+}
