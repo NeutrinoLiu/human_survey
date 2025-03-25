@@ -26,6 +26,7 @@ class ImagePairIterator:
         else:
             random.seed()
         
+        pairs = []
         if not same_idx:
             # A/3.jpg, B/5.jpg style
             images = {
@@ -33,7 +34,6 @@ class ImagePairIterator:
                 for dir in dirs
             }
 
-            pairs = []
             for i in range(total):
                 dir1, dir2 = random.sample(dirs, 2)
                 img1 = random.choice(images[dir1])
@@ -243,8 +243,9 @@ def main():
         
         with col1:
             st.markdown(f"<div class='image-card'>", unsafe_allow_html=True)
-            # In a real app, you'd use st.image to display the actual image
-            st.image(img1, caption="Image A", use_container_width=True)
+            st.header("Video A")
+            st.video(img1, loop=True)
+            # st.image(img1, caption="Image A", use_container_width=True)
             st.markdown("</div>", unsafe_allow_html=True)
             if st.button("Prefer A", key="btnA", 
                         help="Click to select Image A as your preference"):
@@ -253,7 +254,9 @@ def main():
             
         with col2:
             st.markdown(f"<div class='image-card'>", unsafe_allow_html=True)
-            st.image(img2, caption="Image B", use_container_width=True)
+            st.header("Video B")
+            st.video(img2, loop=True)
+            # st.image(img2, caption="Image B", use_container_width=True)
             st.markdown("</div>", unsafe_allow_html=True)
             if st.button("Prefer B", key="btnB", 
                         help="Click to select Image B as your preference"):
