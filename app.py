@@ -268,7 +268,7 @@ def main():
         st.markdown(f"<p style='text-align: center; font-weight: bold; color: #10a37f;'>Your current selection: {cur_selected}</p>", unsafe_allow_html=True)
         
         # Navigation buttons
-        col1, col2 = st.columns([1, 1])
+        col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
         with col1:
             # if st.session_state.current_index > 0:
             #     if st.button("← Previous", help="Go back to the previous image pair"):
@@ -279,20 +279,44 @@ def main():
                 "← Previous", 
                 help="Go back to the previous image pair",
                 disabled=st.session_state.current_index == 0,
-                key="prev_button"
+                key="prev_button",
+                use_container_width=True
             )
             if prev_button:
                 st.session_state.current_index -= 1
                 st.session_state.current_selection = None
                 st.rerun()
-
         with col2:
+            if st.button("Play all videos", use_container_width=True):
+                st.components.v1.html(
+                    """<script>
+                    let videos = parent.document.querySelectorAll("video");
+                    videos.forEach(v => {
+                        v.play();
+                    })
+                    </script>""", 
+                    width=0, height=0
+                )
+        with col3:
+            if st.button("Pause all videos", use_container_width=True):
+                st.components.v1.html(
+                    """<script>
+                    let videos = parent.document.querySelectorAll("video");
+                    videos.forEach(v => {
+                        v.pause();
+                    })
+                    </script>""", 
+                    width=0, height=0
+                )
+
+        with col4:
             # Next button - only created if a selection has been made, otherwise it's disabled
             next_button = st.button(
                 "Next →", 
                 help="Finish this pair and move to the next one",
                 disabled=not st.session_state.current_selection,
-                key="next_button"
+                key="next_button",
+                use_container_width=True
             )
             
             if next_button and st.session_state.current_selection:
